@@ -1,7 +1,62 @@
 ﻿@page "/"
+@using ListasDoblementeEnlazadas.DTO
+@using ListasDoblementeEnlazadas.Services
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Video Player</PageTitle>
 
-<h1>Hola, Mundo</h1>
+<div class="d-flex justify-content-center mb-4">
+    <iframe src="https://www.youtube.com/embed/a9jxNusr0tE" width="75%" height="500" frameborder="10" allowfullscreen></iframe>
+</div>
 
-Welcome to your new app.
+<div class="row mb-4 justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-center">
+            <button @onclick="First" class="btn btn-outline-primary mx-2"><i class="bi bi-chevron-double-left"></i> Primero</button>
+            <button @onclick="Before" class="btn btn-outline-primary mx-2"><i class="bi bi-chevron-left"></i> Anterior</button>
+            <button @onclick="Next" class="btn btn-outline-primary mx-2">Siguiente <i class="bi bi-chevron-right"></i></button>
+            <button @onclick="Last" class="btn btn-outline-primary mx-2">Último <i class="bi bi-chevron-double-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <input type="text" class="form-control mb-2" placeholder="https://" @bind-value="YoutubeLink" />
+    <button class="btn btn-primary">
+        <span class="bi bi-plus"></span> Añadir
+    </button>
+</div>
+
+<p>@Mensaje</p>
+
+@code {
+    ListasDoblementeEnlazadas lista;
+
+    string YoutubeLink = string.Empty;
+    string YoutubeId = string.Empty;
+    string Mensaje = string.Empty;
+
+    void First()
+    {
+
+    }
+
+    void Before()
+    {
+
+    }
+
+    void Next()
+    {
+
+    }
+
+    void Last()
+    {
+
+    }
+
+    void Save()
+    {
+
+    }
+}
