@@ -4,8 +4,8 @@
 
 <PageTitle>Video Player</PageTitle>
 
-<div class="d-flex justify-content-center mb-4">
-    <iframe src="https://www.youtube.com/embed/a9jxNusr0tE" width="75%" height="500" frameborder="10" allowfullscreen></iframe>
+<div class="d-flex justify-content-center mb-4" style="background-color: lightgray;">
+    <iframe src="@youtubeId" width="75%" height="500" frameborder="10" allowfullscreen></iframe>
 </div>
 
 <div class="row mb-4 justify-content-center">
@@ -20,20 +20,57 @@
 </div>
 
 <div class="row mb-4">
-    <input type="text" class="form-control mb-2" placeholder="https://" @bind-value="YoutubeLink" />
-    <button class="btn btn-primary">
+    <input type="text" class="form-control mb-2" placeholder="https://" @bind-value="youtubeLink" />
+    <button class="btn btn-primary" @onclick="Save">
         <span class="bi bi-plus"></span> Añadir
     </button>
 </div>
 
-<p>@Mensaje</p>
+<p>@mensaje</p>
 
 @code {
     ListasDoblementeEnlazadas lista;
 
-    string YoutubeLink = string.Empty;
-    string YoutubeId = string.Empty;
-    string Mensaje = string.Empty;
+    string youtubeLink = string.Empty;
+    string youtubeId = string.Empty;
+    string mensaje = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        lista = new ListasDoblementeEnlazadas();
+    }
+
+    public string GetVideoId(string link)
+    {
+        var uri = new Uri(link);
+        var query = uri.Query;
+        var queryParams = System.Web.HttpUtility.ParseQueryString(query);
+        var videoId = queryParams["v"];
+        return videoId;
+    }
+
+    public void PlayVideo()
+    {
+        if(lista.nodoActual is not null)
+        {
+            youtubeLink = lista.nodoActual.informacion;
+
+            var videoId = GetVideoId(youtubeLink);
+
+            if (!string.IsNullOrEmpty(videoId))
+            {
+                youtubeId = $"https://www.youtube.com/embed/{videoId}";
+            }
+        }
+    }
+
+    void Save()
+    {
+        var nuevoNodo = new Nodo(youtubeLink);
+        mensaje = lista.AgregarNodoAlInicio(nuevoNodo);
+        PlayVideo();
+        youtubeLink = string.Empty;
+    }
 
     void First()
     {
@@ -51,11 +88,6 @@
     }
 
     void Last()
-    {
-
-    }
-
-    void Save()
     {
 
     }
