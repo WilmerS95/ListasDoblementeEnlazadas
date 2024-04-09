@@ -74,21 +74,25 @@
 
     void First()
     {
-
+        lista.nodoActual = lista.primerNodo;
+        PlayVideo();
     }
 
     void Before()
     {
-
+        lista.Anterior();
+        PlayVideo();
     }
 
     void Next()
     {
-
+        lista.Siguiente();
+        PlayVideo();
     }
 
     void Last()
     {
-
+        lista.nodoActual = lista.ultimoNodo;
+        PlayVideo();
     }
 }
