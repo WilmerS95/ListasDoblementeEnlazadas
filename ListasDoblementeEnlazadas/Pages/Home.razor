@@ -19,14 +19,60 @@
     </div>
 </div>
 
-<div class="row mb-4">
+<p>@mensaje</p>
+
+<div class="d-flex justify-content-center">
     <input type="text" class="form-control mb-2" placeholder="https://" @bind-value="youtubeLink" />
-    <button class="btn btn-primary" @onclick="Save">
-        <span class="bi bi-plus"></span> Añadir
+    <div class="input-group-append">
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="saveDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Opciones Para Guardar
+            </button>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="saveDropdown">
+                <button class="dropdown-item" @onclick="AddToTop">Agregar Video Al Inicio</button>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" @onclick="AddToEnd">Agregar Video Al Final</button>
+                <div class="dropdown-divider"></div>
+                <input type="text" class="form-control" placeholder="Ingrese Link De Video X" @bind="videoX" />
+                <button class="dropdown-item" @onclick="AddToBeforeVideoX">Agregar Video Antes de Video X</button>
+                <button class="dropdown-item" @onclick="AddToAfterVideoX">Agregar Video Despues de Video X</button>
+                <div class="dropdown-divider"></div>
+                <input type="number" class="form-control" placeholder="Ingrese la ubicación específica" @bind="posicion" />
+                <button class="dropdown-item" @onclick="AddInSpecificPosition">Agregar Video En Posicion Específica</button>
+                <button class="dropdown-item" @onclick="AddBeforeSpecificPosition">Agregar Video Antes de Posición Específica</button>
+                <button class="dropdown-item" @onclick="AddAfterSpecificPosition">Agregar Video Después de Posición Específica</button>
+                <div class="dropdown-divider"></div>
+                <input type="text" class="form-control" placeholder="Ingrese el Link Del Video A buscar" @bind="videoBuscar" />
+                <button class="dropdown-item" @onclick="VideoSearch">Buscar Video</button>
+            </div>
+        </div>
+    </div>
+    <div class="input-group-append">
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" id="deleteDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Opciones Para Eliminar
+            </button>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="deleteDropdown">
+                <button class="dropdown-item" @onclick="DeleteToTop">Eliminar Video Al Inicio</button>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" @onclick="DeleteInTheEnd">Eliminar Video Al Final</button>
+                <div class="dropdown-divider"></div>
+                <input type="text" class="form-control" placeholder="Ingrese Link De Video X" @bind="videoX" />
+                <button class="dropdown-item" @onclick="DeleteBeforeVideoX">Elimnar Video Antes de Video X</button>
+                <button class="dropdown-item" @onclick="DeleteAfterVideoX">Elimnar Video Despues de Video X</button>
+                <div class="dropdown-divider"></div>
+                <input type="number" class="form-control" placeholder="Ingrese la ubicación específica" @bind="posicion"/>
+                <button class="dropdown-item" @onclick="DeleteInSpecificPosition">Eliminar Video En Posicion Específica</button>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" @onclick="SortTheListAZ">Ordenar Lista Por Link A-Z Ascendente</button>
+                <button class="dropdown-item" @onclick="SortTheListZA">Ordenar Lista Por Link Z-A Descendente</button>
+            </div>
+        </div>
+    </div>
+    <button @onclick="ToggleList" class="btn btn-primary ml-2" style="width: 300px; height: 38px;">
+        @(!mostrarLista ? "Mostrar Lista" : "Ocultar Lista")
     </button>
 </div>
-
-<p>@mensaje</p>
 
 @code {
     ListasDoblementeEnlazadas lista;
@@ -34,10 +80,19 @@
     string youtubeLink = string.Empty;
     string youtubeId = string.Empty;
     string mensaje = string.Empty;
+    public string videoX { get; set; }
+    public int posicion { get; set; }
+    public string videoBuscar { get; set; }
+    bool mostrarLista = false;
 
     protected override void OnInitialized()
     {
         lista = new ListasDoblementeEnlazadas();
+    }
+
+    void ToggleList()
+    {
+        mostrarLista = !mostrarLista;
     }
 
     public string GetVideoId(string link)
@@ -51,7 +106,7 @@
 
     public void PlayVideo()
     {
-        if(lista.nodoActual is not null)
+        if (lista.nodoActual is not null)
         {
             youtubeLink = lista.nodoActual.informacion;
 
@@ -64,12 +119,82 @@
         }
     }
 
-    void Save()
+    void AddToTop()
     {
         var nuevoNodo = new Nodo(youtubeLink);
         mensaje = lista.AgregarNodoAlInicio(nuevoNodo);
         PlayVideo();
         youtubeLink = string.Empty;
+    }
+
+    void AddToEnd()
+    {
+        
+    }
+
+    void AddToBeforeVideoX()
+    {
+
+    }
+
+    void AddToAfterVideoX()
+    {
+
+    }
+
+    void AddInSpecificPosition()
+    {
+
+    }
+
+    void AddBeforeSpecificPosition()
+    {
+
+    }
+
+    void AddAfterSpecificPosition()
+    {
+
+    }
+
+    void VideoSearch()
+    {
+
+    }
+
+    void DeleteToTop()
+    {
+
+    }
+
+    void DeleteInTheEnd()
+    {
+
+    }
+
+    void DeleteBeforeVideoX()
+    {
+
+    }
+
+    void DeleteAfterVideoX()
+    {
+
+    }
+
+    void DeleteInSpecificPosition()
+    {
+
+    }
+
+    void SortTheListAZ()
+    {
+
+    }
+
+    void SortTheListZA()
+    {
+
     }
 
     void First()
