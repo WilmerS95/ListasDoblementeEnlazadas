@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using ListasDoblementeEnlazadas.DTO
 @using ListasDoblementeEnlazadas.Services
+@using System.Text
 
 <PageTitle>Video Player</PageTitle>
 
@@ -61,7 +62,7 @@
                 <button class="dropdown-item" @onclick="DeleteBeforeVideoX">Elimnar Video Antes de Video X</button>
                 <button class="dropdown-item" @onclick="DeleteAfterVideoX">Elimnar Video Despues de Video X</button>
                 <div class="dropdown-divider"></div>
-                <input type="number" class="form-control" placeholder="Ingrese la ubicación específica" @bind="posicion"/>
+                <input type="number" class="form-control" placeholder="Ingrese la ubicación específica" @bind="posicion" />
                 <button class="dropdown-item" @onclick="DeleteInSpecificPosition">Eliminar Video En Posicion Específica</button>
                 <div class="dropdown-divider"></div>
                 <button class="dropdown-item" @onclick="SortTheListAZ">Ordenar Lista Por Link A-Z Ascendente</button>
@@ -73,6 +74,19 @@
         @(!mostrarLista ? "Mostrar Lista" : "Ocultar Lista")
     </button>
 </div>
+
+@if (mostrarLista)
+{
+    <ul class="list-group list-group-numbered">
+        @if (!string.IsNullOrEmpty(ObtenerListaRecursiva()))
+        {
+            @foreach (var item in ObtenerListaRecursiva().Split('\n', StringSplitOptions.RemoveEmptyEntries))
+            {
+                <li class="list-group-item">@item</li>
+            }
+        }
+    </ul>
+}
 
 @code {
     ListasDoblementeEnlazadas lista;
@@ -127,71 +141,85 @@
         youtubeLink = string.Empty;
     }
 
+    //Ana Raquel
     void AddToEnd()
     {
-        
+
     }
 
+    //Wilmer
     void AddToBeforeVideoX()
     {
 
     }
 
+    //José Miguel
     void AddToAfterVideoX()
     {
 
     }
 
+    //José Miguel
     void AddInSpecificPosition()
     {
 
     }
 
+    //Ana Raquel
     void AddBeforeSpecificPosition()
     {
 
     }
 
+    //Ana Rocío
     void AddAfterSpecificPosition()
     {
 
     }
 
+    //Ana Rocío
     void VideoSearch()
     {
 
     }
 
+    //Ana Raquel
     void DeleteToTop()
     {
 
     }
 
+    //Ana Rocío
     void DeleteInTheEnd()
     {
 
     }
 
+    //Jorge Leonardo
     void DeleteBeforeVideoX()
     {
 
     }
 
+    //Jorge Leonardo
     void DeleteAfterVideoX()
     {
 
     }
 
+    //Jorge Leonardo
     void DeleteInSpecificPosition()
     {
 
     }
 
+    //Wilmer
     void SortTheListAZ()
     {
 
     }
 
+    //Wilmer
     void SortTheListZA()
     {
 
@@ -220,4 +248,21 @@
         lista.nodoActual = lista.ultimoNodo;
         PlayVideo();
     }
+
+    public string ObtenerListaRecursiva()
+    {
+        StringBuilder sb = new StringBuilder();
+        RecorrerRecursivo(lista.primerNodo, sb);
+        return sb.ToString();
+    }
+
+    void RecorrerRecursivo(Nodo nodoActual, StringBuilder sb)
+    {
+        if (nodoActual != null)
+        {
+            sb.AppendLine(nodoActual.informacion);
+            RecorrerRecursivo(nodoActual.ligaSiguiente, sb);
+        }
+    }
+
 }
