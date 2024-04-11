@@ -177,6 +177,19 @@
     //Ana Rocío
     void AddAfterSpecificPosition()
     {
+        Nodo nuevoNodo = new Nodo(youtubeLink);
+
+        if (posicion < 0)
+        {
+            mensaje = "La ubicación específica debe ser un número positivo.";
+        }
+        else
+        {
+            mensaje = lista.AddAfterSpecificPosition(posicion, nuevoNodo);
+            PlayVideo();
+        }
+        youtubeLink  = string.Empty;
+        posicion = 0;
 
     }
 
@@ -195,6 +208,7 @@
     //Ana Rocío
     void DeleteInTheEnd()
     {
+        mensaje = lista.EliminarNodoAlFinal();
 
     }
 
