@@ -150,7 +150,10 @@
     //Wilmer
     void AddToBeforeVideoX()
     {
-
+        Nodo nuevoNodo = new Nodo(youtubeLink);
+        mensaje = lista.AddBeforeVideoX(videoX, nuevoNodo);
+        PlayVideo();
+        youtubeLink = string.Empty;
     }
 
     //José Miguel
