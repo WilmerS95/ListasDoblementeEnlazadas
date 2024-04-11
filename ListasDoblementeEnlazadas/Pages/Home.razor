@@ -104,12 +104,12 @@
         lista = new ListasDoblementeEnlazadas();
     }
 
-    void ToggleList()
+    private void ToggleList()
     {
         mostrarLista = !mostrarLista;
     }
 
-    public string GetVideoId(string link)
+    private string GetVideoId(string link)
     {
         var uri = new Uri(link);
         var query = uri.Query;

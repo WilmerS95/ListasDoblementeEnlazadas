@@ -1,5 +1,5 @@
 ﻿using ListasDoblementeEnlazadas.DTO;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace ListasDoblementeEnlazadas.Services
 {
@@ -61,6 +61,7 @@ namespace ListasDoblementeEnlazadas.Services
                         nodoActual.ligaAnterior.ligaSiguiente = nuevoNodo;
                         nodoActual.ligaAnterior = nuevoNodo;
                     }
+                    nodoActual = nuevoNodo;
                     return "Se ha agregado el video antes del video específico.";
                 }
                 nodoActual = nodoActual.ligaSiguiente;
