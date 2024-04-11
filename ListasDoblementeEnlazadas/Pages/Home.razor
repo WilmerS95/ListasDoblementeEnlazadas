@@ -159,12 +159,21 @@
     //José Miguel
     void AddToAfterVideoX()
     {
+        Nodo nuevoNodo = new Nodo(youtubeLink);
+        mensaje = lista.AddToAfterVideoX(videoX, nuevoNodo);
+        PlayVideo();
+        youtubeLink = string.Empty;
+
 
     }
 
     //José Miguel
     void AddInSpecificPosition()
     {
+        Nodo nuevoNodo = new Nodo(youtubeLink);
+        mensaje = lista.AddInSpecificPosition(posicion, nuevoNodo);
+        PlayVideo();
+        youtubeLink = string.Empty;
 
     }
 

@@ -80,5 +80,83 @@ namespace ListasDoblementeEnlazadas.Services
             nodoActual = nodoActual.ligaAnterior ?? primerNodo;
             return nodoActual;
         }
+
+        public string AddToAfterVideoX(string videoX, Nodo nuevoNodo)
+        {
+            if (isEmpty)
+            {
+                return "La lista está vacía, no hay videos para eliminar";
+            }
+
+            Nodo nodoActual = primerNodo;
+
+            while (nodoActual != null)
+            {
+                if (nodoActual.informacion.ToString() == videoX)
+                {
+                    if (nodoActual == ultimoNodo)
+                    {
+                        ultimoNodo = nuevoNodo;
+                    }
+                    else
+                    {
+                        Nodo siguiente = nodoActual.ligaSiguiente;
+                        siguiente.ligaAnterior = nuevoNodo;
+                    }
+
+                    return "Se ha agregado el nodo después del video indicado";
+                }
+
+                nodoActual = nodoActual.ligaSiguiente;
+                
+                }
+            return "Video no encontrado en la lista";
+        }
+
+        public string AddInSpecificPosition(int posicion, Nodo nuevoNodo)
+        {
+            if (isEmpty)
+            {
+                return "Lista vacía";
+            }
+
+            Nodo nodoActual = primerNodo;
+            int count = 0;
+
+            while (nodoActual != null && count < posicion)
+            {
+                nodoActual = nodoActual.ligaSiguiente;
+                count++;
+            }
+
+            if (count == posicion)
+            {
+                nuevoNodo.ligaSiguiente = nodoActual;
+
+              
+            if (nodoActual == primerNodo)
+                {
+                    primerNodo.ligaAnterior = nuevoNodo;
+                    primerNodo = nuevoNodo;
+                }
+                else
+                {
+                    Nodo previo = nodoActual.ligaAnterior;
+                    previo.ligaSiguiente = nuevoNodo;
+                    nuevoNodo.ligaAnterior = previo;
+                    nodoActual.ligaAnterior = nuevoNodo;
+                }
+
+                return "Nodo agregado en la posición " + posicion;
+            }
+            else
+            {
+                return "Posición inválida";
+            }
+
+        }
+
+
+
     }
 }
