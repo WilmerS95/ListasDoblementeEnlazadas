@@ -1,4 +1,5 @@
 ﻿using ListasDoblementeEnlazadas.DTO;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace ListasDoblementeEnlazadas.Services
@@ -109,6 +110,23 @@ namespace ListasDoblementeEnlazadas.Services
             }
         }
 
+        public (Nodo, int)  VideoSearch(string dato)
+        {
+            Nodo nodoActual = primerNodo;
+            int posicion = 1;
+
+            while (nodoActual != null)
+            {
+                if (nodoActual.informacion.ToString() == dato)
+                {
+                    return (nodoActual, posicion);
+                }
+                nodoActual = nodoActual.ligaSiguiente;
+                posicion++;
+            }
+
+            return (null, -1);
+        }
 
         public string EliminarNodoAlFinal()
         {
@@ -135,6 +153,58 @@ namespace ListasDoblementeEnlazadas.Services
             return "El video se ha eliminado";
         }
 
+        public void SortTheListAZ()
+        {
+            bool intercambio;
+            do
+            {
+                intercambio = false;
+                nodoActual = primerNodo;
+                Nodo nodosiguiente = primerNodo?.ligaSiguiente;
+              
+                while (nodosiguiente != null)
+                {
+                    if (string.Compare(nodoActual.informacion.ToString(), nodosiguiente.informacion.ToString(), StringComparison.OrdinalIgnoreCase) > 0)
+                    {
+                        string temp = nodoActual.informacion;
+                        nodoActual.informacion = nodosiguiente.informacion;
+                        nodosiguiente.informacion = temp;
+
+                        intercambio = true;
+                    }
+
+                    nodoActual = nodosiguiente;
+                    nodosiguiente = nodosiguiente.ligaSiguiente;
+                }
+            } while (intercambio);
+        }
+
+        public void SortTheListZA()
+        {
+            bool intercambio;
+            do
+            {
+                intercambio = false;
+                nodoActual = primerNodo;
+                Nodo nodosiguiente = primerNodo?.ligaSiguiente;
+
+                while (nodosiguiente != null)
+                {
+                    if (string.Compare(nodoActual.informacion.ToString(), nodosiguiente.informacion.ToString(), StringComparison.OrdinalIgnoreCase) < 0)
+                    {
+                        string temp = nodoActual.informacion;
+                        nodoActual.informacion = nodosiguiente.informacion;
+                        nodosiguiente.informacion = temp;
+
+                        intercambio = true;
+                    }
+
+                    nodoActual = nodosiguiente;
+                    nodosiguiente = nodosiguiente.ligaSiguiente;
+                }
+            } while (intercambio);
+
+        }
 
         public Nodo Siguiente()
         {

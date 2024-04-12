@@ -212,8 +212,28 @@
     //Ana Rocío
     void VideoSearch()
     {
+        if (string.IsNullOrEmpty(videoBuscar))
+        {
+            mensaje = "Por favor, ingrese un dato válido para buscar.";
+            return;
+        }
 
+        (Nodo nodoBuscado, int posicion) = lista.VideoSearch(videoBuscar);
+        if (nodoBuscado != null)
+        {
+            mensaje = $"El elemento fue encontrado en la posición {posicion}.";
+            videoBuscar = nodoBuscado.informacion;
+            youtubeLink = videoBuscar;
+            StateHasChanged();
+
+        }
+        else
+        {
+            mensaje = "El elemento no fue encontrado en la lista.";
+        }
+        youtubeLink = string.Empty;
     }
+
 
     //Ana Raquel
     void DeleteToTop()
@@ -314,13 +334,14 @@
     //Wilmer
     void SortTheListAZ()
     {
+        lista.SortTheListAZ();
 
     }
 
     //Wilmer
     void SortTheListZA()
     {
-
+        lista.SortTheListZA();
     }
 
     void First()
