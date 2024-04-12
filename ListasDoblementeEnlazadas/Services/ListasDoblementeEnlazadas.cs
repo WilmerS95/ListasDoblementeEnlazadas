@@ -74,10 +74,11 @@ namespace ListasDoblementeEnlazadas.Services
 
         public string AddAfterSpecificPosition(int posicion, Nodo nuevoNodo)
         {
-            if (isEmpty)
+            if (posicion < 1)
             {
-                return "La lista esta vacia.";
+                return "La posición para gregar debe ser mayor a 0. ";
             }
+
             nodoActual = primerNodo;
             int contador = 1;
 
@@ -110,22 +111,24 @@ namespace ListasDoblementeEnlazadas.Services
             }
         }
 
-        public (Nodo, int)  VideoSearch(string dato)
+        public string VideoSearch(string video)
         {
-            Nodo nodoActual = primerNodo;
+          
+            nodoActual = primerNodo;
             int posicion = 1;
 
             while (nodoActual != null)
             {
-                if (nodoActual.informacion.ToString() == dato)
+                if (nodoActual.informacion.ToString() == video)
                 {
-                    return (nodoActual, posicion);
+                    return $"El video '{video}' fue encontrado en la posición {posicion}.";
+                   
                 }
                 nodoActual = nodoActual.ligaSiguiente;
                 posicion++;
             }
 
-            return (null, -1);
+            return $"El video '{video}'  no fue encontrado en la lista ";
         }
 
         public string EliminarNodoAlFinal()
