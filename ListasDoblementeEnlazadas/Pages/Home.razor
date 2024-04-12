@@ -75,6 +75,12 @@
     </button>
 </div>
 
+@if (!string.IsNullOrEmpty(searchResult))
+{
+    <p>@searchResult</p>
+}
+
+
 @if (mostrarLista)
 {
     <ul class="list-group list-group-numbered">
@@ -194,44 +200,22 @@
     //Ana Rocío
     void AddAfterSpecificPosition()
     {
-        Nodo nuevoNodo = new Nodo(youtubeLink);
-
-        if (posicion < 0)
-        {
-            mensaje = "La ubicación específica debe ser un número positivo.";
-        }
-        else
-        {
-            mensaje = lista.AddAfterSpecificPosition(posicion, nuevoNodo);
-            PlayVideo();
-        }
+        var nuevoNodo = new Nodo(youtubeLink);
+        mensaje = lista.AddAfterSpecificPosition(posicion, nuevoNodo);
+        PlayVideo();
         youtubeLink  = string.Empty;
         posicion = 0;
-
     }
 
     //Ana Rocío
+    string searchResult;
+    string videoToSearch;
+    string videoFound;
+
     void VideoSearch()
-    {
-        if (string.IsNullOrEmpty(videoBuscar))
-        {
-            mensaje = "Por favor, ingrese un dato válido para buscar.";
-            return;
-        }
-
-        (Nodo nodoBuscado, int posicion) = lista.VideoSearch(videoBuscar);
-        if (nodoBuscado != null)
-        {
-            mensaje = $"El elemento fue encontrado en la posición {posicion}.";
-            videoBuscar = nodoBuscado.informacion;
-            youtubeLink = videoBuscar;
-            StateHasChanged();
-
-        }
-        else
-        {
-            mensaje = "El elemento no fue encontrado en la lista.";
-        }
+    { 
+        searchResult = lista.VideoSearch(videoToSearch);
+        StateHasChanged();
         youtubeLink = string.Empty;
     }
 
