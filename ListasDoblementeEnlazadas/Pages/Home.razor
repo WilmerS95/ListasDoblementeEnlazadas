@@ -144,7 +144,10 @@
     //Ana Raquel
     void AddToEnd()
     {
-
+        var nuevoNodo = new Nodo(youtubeLink);
+        mensaje = lista.AddToEnd(nuevoNodo);
+        PlayVideo(); 
+        youtubeLink = string.Empty; 
     }
 
     //Wilmer
@@ -159,10 +162,10 @@
     //José Miguel
     void AddToAfterVideoX()
     {
-        Nodo nuevoNodo = new Nodo(youtubeLink);
+        /*Nodo nuevoNodo = new Nodo(youtubeLink);
         mensaje = lista.AddToAfterVideoX(videoX, nuevoNodo);
         PlayVideo();
-        youtubeLink = string.Empty;
+        youtubeLink = string.Empty;*/
 
 
     }
@@ -170,17 +173,21 @@
     //José Miguel
     void AddInSpecificPosition()
     {
-        Nodo nuevoNodo = new Nodo(youtubeLink);
+        /*Nodo nuevoNodo = new Nodo(youtubeLink);
         mensaje = lista.AddInSpecificPosition(posicion, nuevoNodo);
         PlayVideo();
-        youtubeLink = string.Empty;
+        youtubeLink = string.Empty;*/
 
     }
 
     //Ana Raquel
     void AddBeforeSpecificPosition()
     {
-
+        var nuevoNodo = new Nodo(youtubeLink); 
+        mensaje = lista.AddBeforeSpecificPosition(posicion, nuevoNodo);
+        PlayVideo();
+        youtubeLink = string.Empty;
+        posicion = 0;
     }
 
     //Ana Rocío
@@ -211,7 +218,9 @@
     //Ana Raquel
     void DeleteToTop()
     {
-
+        mensaje = lista.DeleteToTop();
+        PlayVideo();
+        youtubeLink = string.Empty;
     }
 
     //Ana Rocío

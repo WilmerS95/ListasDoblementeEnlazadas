@@ -35,7 +35,7 @@ namespace ListasDoblementeEnlazadas.Services
             return "Se ha agregado al inicio de la lista";
         }
 
-    
+
 
         public string AddBeforeVideoX(string videoX, Nodo nuevoNodo)
         {
@@ -89,13 +89,13 @@ namespace ListasDoblementeEnlazadas.Services
             if (nodoActual != null)
             {
                 nuevoNodo.ligaSiguiente = nodoActual.ligaSiguiente;
-                if(nodoActual.ligaSiguiente != null) 
+                if (nodoActual.ligaSiguiente != null)
                 {
                     nodoActual.ligaSiguiente.ligaAnterior = nuevoNodo;
                 }
                 nuevoNodo.ligaAnterior = nodoActual;
                 nodoActual.ligaSiguiente = nuevoNodo;
-                
+
                 if (nuevoNodo.ligaSiguiente == null)
                 {
                     ultimoNodo = nuevoNodo;
@@ -109,7 +109,7 @@ namespace ListasDoblementeEnlazadas.Services
             }
         }
 
-       
+
         public string EliminarNodoAlFinal()
         {
 
@@ -147,7 +147,70 @@ namespace ListasDoblementeEnlazadas.Services
             nodoActual = nodoActual.ligaAnterior ?? primerNodo;
             return nodoActual;
         }
+        public string AddToEnd(Nodo nuevoNodo)
+        {
+            if (isEmpty)
+            {
+                primerNodo = ultimoNodo = nuevoNodo;
+            }
+            else
+            {
+                nuevoNodo.ligaAnterior = ultimoNodo;
+                ultimoNodo.ligaSiguiente = nuevoNodo;
+                ultimoNodo = nuevoNodo;
+            }
+            nodoActual = nuevoNodo;
+            return "El video se a agregado al final de la lista.";
+        }
+        public string AddBeforeSpecificPosition(int posicionEspecifica, Nodo nuevoNodo)
+        {
+            if (posicionEspecifica < 1)
+            {
+                return "La posición para gregar debe ser mayor a 0. ";
+            }
 
+            Nodo nodoActual = primerNodo;
+            int posicion = 1;
+
+            while (nodoActual != null && posicion < posicionEspecifica)
+            {
+                nodoActual = nodoActual.ligaSiguiente; posicion++;
+            }
+
+            if (nodoActual != null)
+            {
+                if (nodoActual.ligaAnterior == null)
+                {
+                    AgregarNodoAlInicio(nuevoNodo);
+                }
+                else
+                {
+                    nuevoNodo.ligaAnterior = nodoActual.ligaAnterior;
+                    nuevoNodo.ligaSiguiente = nodoActual;
+                    nodoActual.ligaAnterior.ligaSiguiente = nuevoNodo;
+                    nodoActual.ligaAnterior = nuevoNodo;
+                }
+                nodoActual = nuevoNodo;
+                return "Se agrego el video antes de la posición especifica. " ;
+            }
+            return "La posición especifica esta fuera de rango. ";
+        }
+
+        public string DeleteToTop()
+        {
+            if (primerNodo == null)
+            {
+                return "La lista esta vacía. ";
+            }
+
+            Nodo nodoSiguiente = primerNodo.ligaSiguiente;
+
+            primerNodo = nodoSiguiente;
+            primerNodo.ligaAnterior = null;
+            return "Se ha eliminado el primer video de la lista. ";
+        }
+    }
+    /*
         public string AddToAfterVideoX(string videoX, Nodo nuevoNodo)
         {
             if (isEmpty)
@@ -220,6 +283,7 @@ namespace ListasDoblementeEnlazadas.Services
             {
                 return "Posición inválida";
             }
+
 
         }
 
@@ -394,4 +458,8 @@ namespace ListasDoblementeEnlazadas.Services
             }
         }
     }
+
+        }*/
+
+
 }
