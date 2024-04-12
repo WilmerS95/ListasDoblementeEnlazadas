@@ -160,12 +160,21 @@
     //José Miguel
     void AddToAfterVideoX()
     {
+        Nodo nuevoNodo = new Nodo(youtubeLink);
+        mensaje = lista.AddToAfterVideoX(videoX, nuevoNodo);
+        PlayVideo();
+        youtubeLink = string.Empty;
+
 
     }
 
     //José Miguel
     void AddInSpecificPosition()
     {
+        Nodo nuevoNodo = new Nodo(youtubeLink);
+        mensaje = lista.AddInSpecificPosition(posicion, nuevoNodo);
+        PlayVideo();
+        youtubeLink = string.Empty;
 
     }
 
@@ -178,6 +187,19 @@
     //Ana Rocío
     void AddAfterSpecificPosition()
     {
+        Nodo nuevoNodo = new Nodo(youtubeLink);
+
+        if (posicion < 0)
+        {
+            mensaje = "La ubicación específica debe ser un número positivo.";
+        }
+        else
+        {
+            mensaje = lista.AddAfterSpecificPosition(posicion, nuevoNodo);
+            PlayVideo();
+        }
+        youtubeLink  = string.Empty;
+        posicion = 0;
 
     }
 
@@ -196,6 +218,7 @@
     //Ana Rocío
     void DeleteInTheEnd()
     {
+        mensaje = lista.EliminarNodoAlFinal();
 
     }
 
