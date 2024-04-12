@@ -253,82 +253,82 @@
     //Jorge Leonardo
     void DeleteBeforeVideoX()
     {
-        Nodo nodoActual = lista.primerNodo;
-        Nodo nodoAnterior = null;
+        // Nodo nodoActual = lista.primerNodo;
+        // Nodo nodoAnterior = null;
 
-        while (nodoActual != null)
-        {
-            if (nodoActual.ligaAnterior != null && nodoActual.ligaAnterior.informacion == videoX)
-            {
-                Nodo nodoEliminar = nodoActual;
+        // while (nodoActual != null)
+        // {
+        //     if (nodoActual.ligaAnterior != null && nodoActual.ligaAnterior.informacion == videoX)
+        //     {
+        //         Nodo nodoEliminar = nodoActual;
 
-                if (nodoActual == lista.nodoActual)
-                {
-                    lista.nodoActual = nodoEliminar;
-                }
+        //         if (nodoActual == lista.nodoActual)
+        //         {
+        //             lista.nodoActual = nodoEliminar;
+        //         }
 
-                nodoActual.ligaSiguiente.ligaAnterior = nodoActual.ligaAnterior;
-                nodoActual.ligaAnterior.ligaSiguiente = nodoActual.ligaSiguiente;
+        //         nodoActual.ligaSiguiente.ligaAnterior = nodoActual.ligaAnterior;
+        //         nodoActual.ligaAnterior.ligaSiguiente = nodoActual.ligaSiguiente;
 
-                lista.EliminarNodo(nodoEliminar);
+        //         lista.EliminarNodo(nodoEliminar);
 
-                break;
-            }
+        //         break;
+        //     }
 
-            nodoAnterior = nodoActual;
-            nodoActual = nodoActual.ligaSiguiente;
-        }
+        //     nodoAnterior = nodoActual;
+        //     nodoActual = nodoActual.ligaSiguiente;
+        // }
 
-        mensaje = "Se ha eliminado el nodo antes de " + videoX;
+        // mensaje = "Se ha eliminado el nodo antes de " + videoX;
 
     }
 
     //Jorge Leonardo
     void DeleteAfterVideoX()
     {
-        Nodo nodoActual = lista.primerNodo;
+        // Nodo nodoActual = lista.primerNodo;
 
-        while (nodoActual != null)
-        {
-            if (nodoActual.informacion == videoX && nodoActual.ligaSiguiente != null)
-            {
-                Nodo nodoEliminar = nodoActual.ligaSiguiente;
+        // while (nodoActual != null)
+        // {
+        //     if (nodoActual.informacion == videoX && nodoActual.ligaSiguiente != null)
+        //     {
+        //         Nodo nodoEliminar = nodoActual.ligaSiguiente;
 
-                if (nodoEliminar == lista.nodoActual)
-                {
-                    lista.nodoActual = nodoEliminar.ligaSiguiente;
-                }
+        //         if (nodoEliminar == lista.nodoActual)
+        //         {
+        //             lista.nodoActual = nodoEliminar.ligaSiguiente;
+        //         }
 
-                if (nodoEliminar == lista.ultimoNodo)
-                {
-                    lista.ultimoNodo = nodoActual;
-                }
+        //         if (nodoEliminar == lista.ultimoNodo)
+        //         {
+        //             lista.ultimoNodo = nodoActual;
+        //         }
 
-                nodoActual.ligaSiguiente = nodoEliminar.ligaSiguiente;
+        //         nodoActual.ligaSiguiente = nodoEliminar.ligaSiguiente;
 
-                lista.EliminarNodo(nodoEliminar);
+        //         lista.EliminarNodo(nodoEliminar);
 
-                mensaje = "Se ha eliminado el nodo después de " + videoX;
+        //         mensaje = "Se ha eliminado el nodo después de " + videoX;
 
-                break;
-            }
+        //         break;
+        //     }
 
-            nodoActual = nodoActual.ligaSiguiente;
-        }
+        //     nodoActual = nodoActual.ligaSiguiente;
+        // }
     }
 
     //Jorge Leonardo
     void DeleteInSpecificPosition()
     {
-        if (posicion <= 0)
-        {
-            mensaje = "La posición específica debe ser un número positivo.";
-            return;
-        }
+        // if (posicion <= 0)
+        // {
+        //     mensaje = "La posición específica debe ser un número positivo.";
+        //     return;
+        // }
 
-        mensaje = lista.DeleteInSpecificPosition(posicion);
-        PlayVideo();
-        posicion = 0;
+        // mensaje = lista.DeleteInSpecificPosition(posicion);
+        // PlayVideo();
+        // posicion = 0;
     }
 
     //Wilmer
