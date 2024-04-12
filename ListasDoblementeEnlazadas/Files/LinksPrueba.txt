@@ -1,0 +1,21 @@
+Agregar al inicio OK
+Agregar al final OK
+Agregar antes de video X OK
+Agregar despues de video X OK
+Agregar en posición específica OK
+Agregar antes de posición específica OK
+Agregar después de posición específica OK
+Eliminar al inicio OK
+Eliminar al final OK
+Eliminar antes de posición específica OK
+Eliminar después de posición específica OK
+Botón Mostrar / Ocultar OK
+
+
+LINKS VIDEOS
+https://www.youtube.com/watch?v=RNP7PBDiMbY
+https://www.youtube.com/watch?v=lLcDuROBXIw
+https://www.youtube.com/watch?v=DpfOS_BH7YM
+https://www.youtube.com/watch?v=v3KXLYLtRwY
+https://www.youtube.com/watch?v=OZ0MBTY9nnA
+https://www.youtube.com/watch?v=4e5NiZaunGs

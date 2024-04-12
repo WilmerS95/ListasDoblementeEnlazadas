@@ -6,7 +6,7 @@
 <PageTitle>Video Player</PageTitle>
 
 <div class="d-flex justify-content-center mb-4" style="background-color: lightgray;">
-    <iframe src="@youtubeId" width="75%" height="500" frameborder="10" allowfullscreen></iframe>
+    <iframe src="@youtubeId" width="75%" height="500" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div class="row mb-4 justify-content-center">
@@ -75,12 +75,6 @@
     </button>
 </div>
 
-@if (!string.IsNullOrEmpty(searchResult))
-{
-    <p>@searchResult</p>
-}
-
-
 @if (mostrarLista)
 {
     <ul class="list-group list-group-numbered">
@@ -104,6 +98,7 @@
     public int posicion { get; set; }
     public string videoBuscar { get; set; }
     bool mostrarLista = false;
+    string videoFound = string.Empty;
 
     protected override void OnInitialized()
     {
@@ -147,16 +142,16 @@
         youtubeLink = string.Empty;
     }
 
-    //Ana Raquel
+    //Ana Raquel OK
     void AddToEnd()
     {
         var nuevoNodo = new Nodo(youtubeLink);
         mensaje = lista.AddToEnd(nuevoNodo);
         PlayVideo(); 
-        youtubeLink = string.Empty; 
+        youtubeLink = string.Empty;
     }
 
-    //Wilmer
+    //Wilmer OK
     void AddToBeforeVideoX()
     {
         Nodo nuevoNodo = new Nodo(youtubeLink);
@@ -166,28 +161,27 @@
         videoX = string.Empty;
     }
 
-    //José Miguel
+    //José Miguel OK
     void AddToAfterVideoX()
     {
-        /*Nodo nuevoNodo = new Nodo(youtubeLink);
+        Nodo nuevoNodo = new Nodo(youtubeLink);
         mensaje = lista.AddToAfterVideoX(videoX, nuevoNodo);
         PlayVideo();
-        youtubeLink = string.Empty;*/
-
-
+        youtubeLink = string.Empty;
+        videoX = string.Empty;
     }
 
-    //José Miguel
+    //José Miguel OK
     void AddInSpecificPosition()
     {
-        /*Nodo nuevoNodo = new Nodo(youtubeLink);
+        Nodo nuevoNodo = new Nodo(youtubeLink);
         mensaje = lista.AddInSpecificPosition(posicion, nuevoNodo);
         PlayVideo();
-        youtubeLink = string.Empty;*/
-
+        youtubeLink = string.Empty;
+        posicion = 0;
     }
 
-    //Ana Raquel
+    //Ana Raquel OK
     void AddBeforeSpecificPosition()
     {
         var nuevoNodo = new Nodo(youtubeLink); 
@@ -197,7 +191,7 @@
         posicion = 0;
     }
 
-    //Ana Rocío
+    //Ana Rocío OK
     void AddAfterSpecificPosition()
     {
         var nuevoNodo = new Nodo(youtubeLink);
@@ -208,19 +202,15 @@
     }
 
     //Ana Rocío
-    string searchResult;
-    string videoToSearch;
-    string videoFound;
-
     void VideoSearch()
     { 
-        searchResult = lista.VideoSearch(videoToSearch);
+        mensaje = lista.VideoSearch(videoBuscar);
         StateHasChanged();
         youtubeLink = string.Empty;
     }
 
 
-    //Ana Raquel
+    //Ana Raquel Ok
     void DeleteToTop()
     {
         mensaje = lista.DeleteToTop();
@@ -228,102 +218,49 @@
         youtubeLink = string.Empty;
     }
 
-    //Ana Rocío
+    //Ana RocíoOk
     void DeleteInTheEnd()
     {
         mensaje = lista.EliminarNodoAlFinal();
-
+        PlayVideo();
+        youtubeLink = string.Empty;
     }
 
     //Jorge Leonardo
     void DeleteBeforeVideoX()
     {
-        // Nodo nodoActual = lista.primerNodo;
-        // Nodo nodoAnterior = null;
-
-        // while (nodoActual != null)
-        // {
-        //     if (nodoActual.ligaAnterior != null && nodoActual.ligaAnterior.informacion == videoX)
-        //     {
-        //         Nodo nodoEliminar = nodoActual;
-
-        //         if (nodoActual == lista.nodoActual)
-        //         {
-        //             lista.nodoActual = nodoEliminar;
-        //         }
-
-        //         nodoActual.ligaSiguiente.ligaAnterior = nodoActual.ligaAnterior;
-        //         nodoActual.ligaAnterior.ligaSiguiente = nodoActual.ligaSiguiente;
-
-        //         lista.EliminarNodo(nodoEliminar);
-
-        //         break;
-        //     }
-
-        //     nodoAnterior = nodoActual;
-        //     nodoActual = nodoActual.ligaSiguiente;
-        // }
-
-        // mensaje = "Se ha eliminado el nodo antes de " + videoX;
-
+        mensaje = lista.DeleteBeforeVideoX(videoX);
+        PlayVideo();
+        videoX = string.Empty;
+        youtubeLink = string.Empty;
     }
 
     //Jorge Leonardo
     void DeleteAfterVideoX()
     {
-        // Nodo nodoActual = lista.primerNodo;
-
-        // while (nodoActual != null)
-        // {
-        //     if (nodoActual.informacion == videoX && nodoActual.ligaSiguiente != null)
-        //     {
-        //         Nodo nodoEliminar = nodoActual.ligaSiguiente;
-
-        //         if (nodoEliminar == lista.nodoActual)
-        //         {
-        //             lista.nodoActual = nodoEliminar.ligaSiguiente;
-        //         }
-
-        //         if (nodoEliminar == lista.ultimoNodo)
-        //         {
-        //             lista.ultimoNodo = nodoActual;
-        //         }
-
-        //         nodoActual.ligaSiguiente = nodoEliminar.ligaSiguiente;
-
-        //         lista.EliminarNodo(nodoEliminar);
-
-        //         mensaje = "Se ha eliminado el nodo después de " + videoX;
-
-        //         break;
-        //     }
-
-        //     nodoActual = nodoActual.ligaSiguiente;
-        // }
+        mensaje = lista.DeleteAfterVideoX(videoX);
+        PlayVideo();
+        videoX = string.Empty;
+        youtubeLink = string.Empty;
     }
 
     //Jorge Leonardo
     void DeleteInSpecificPosition()
     {
-        // if (posicion <= 0)
-        // {
-        //     mensaje = "La posición específica debe ser un número positivo.";
-        //     return;
-        // }
-
-        // mensaje = lista.DeleteInSpecificPosition(posicion);
-        // PlayVideo();
-        // posicion = 0;
+        mensaje = lista.DeleteInSpecificPosition(posicion);
+        PlayVideo();
+        videoX = string.Empty;
+        youtubeLink = string.Empty;
     }
 
-    //Wilmer
+    //Ana Rocío
     void SortTheListAZ()
     {
         lista.SortTheListAZ();
 
     }
 
-    //Wilmer
+    //Ana Rocío
     void SortTheListZA()
     {
         lista.SortTheListZA();
