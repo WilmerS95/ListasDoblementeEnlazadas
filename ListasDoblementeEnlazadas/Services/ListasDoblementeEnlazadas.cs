@@ -35,7 +35,7 @@ namespace ListasDoblementeEnlazadas.Services
             return "Se ha agregado al inicio de la lista";
         }
 
-    
+
 
         public string AddBeforeVideoX(string videoX, Nodo nuevoNodo)
         {
@@ -89,13 +89,13 @@ namespace ListasDoblementeEnlazadas.Services
             if (nodoActual != null)
             {
                 nuevoNodo.ligaSiguiente = nodoActual.ligaSiguiente;
-                if(nodoActual.ligaSiguiente != null) 
+                if (nodoActual.ligaSiguiente != null)
                 {
                     nodoActual.ligaSiguiente.ligaAnterior = nuevoNodo;
                 }
                 nuevoNodo.ligaAnterior = nodoActual;
                 nodoActual.ligaSiguiente = nuevoNodo;
-                
+
                 if (nuevoNodo.ligaSiguiente == null)
                 {
                     ultimoNodo = nuevoNodo;
@@ -109,7 +109,7 @@ namespace ListasDoblementeEnlazadas.Services
             }
         }
 
-       
+
         public string EliminarNodoAlFinal()
         {
 
@@ -147,12 +147,11 @@ namespace ListasDoblementeEnlazadas.Services
             nodoActual = nodoActual.ligaAnterior ?? primerNodo;
             return nodoActual;
         }
-        public string AddToEnd( Nodo nuevoNodo)
+        public string AddToEnd(Nodo nuevoNodo)
         {
-            if (primerNodo == null)
+            if (isEmpty)
             {
                 primerNodo = ultimoNodo = nuevoNodo;
-                return "No se encontraron videos.";
             }
             else
             {
@@ -160,51 +159,41 @@ namespace ListasDoblementeEnlazadas.Services
                 ultimoNodo.ligaSiguiente = nuevoNodo;
                 ultimoNodo = nuevoNodo;
             }
+            nodoActual = nuevoNodo;
             return "El video se a agregado al final de la lista.";
         }
         public string AddBeforeSpecificPosition(int posicionEspecifica, Nodo nuevoNodo)
         {
-            if (primerNodo == null)
+            if (posicionEspecifica < 1)
             {
-                primerNodo = ultimoNodo = nuevoNodo;
-            }
-            else if (posicionEspecifica <= 1)
-            {
-                nuevoNodo.ligaSiguiente = primerNodo;
-                primerNodo.ligaAnterior = nuevoNodo;
-                primerNodo = nuevoNodo;
-                return "Se ha agregado el video al la lista";
-            }
-            else
-            {
-                nodoActual = primerNodo;
+                return "La posición para gregar debe ser mayor a 0. ";
             }
 
-                int contador = 1;
+            Nodo nodoActual = primerNodo;
+            int posicion = 1;
 
-            while (nodoActual != null && contador < posicionEspecifica - 1)
+            while (nodoActual != null && posicion < posicionEspecifica)
             {
-                nodoActual = nodoActual.ligaSiguiente;
-                contador++;
+                nodoActual = nodoActual.ligaSiguiente; posicion++;
             }
+
             if (nodoActual != null)
             {
-                nuevoNodo.ligaSiguiente = nodoActual.ligaSiguiente;
-                nuevoNodo.ligaAnterior = nodoActual;
-                nodoActual.ligaSiguiente = nuevoNodo;
-                return "Se ha agregado al inicio de la lista";
+                if (nodoActual.ligaAnterior == null)
+                {
+                    AgregarNodoAlInicio(nuevoNodo);
+                }
+                else
+                {
+                    nuevoNodo.ligaAnterior = nodoActual.ligaAnterior;
+                    nuevoNodo.ligaSiguiente = nodoActual;
+                    nodoActual.ligaAnterior.ligaSiguiente = nuevoNodo;
+                    nodoActual.ligaAnterior = nuevoNodo;
+                }
+                nodoActual = nuevoNodo;
+                return "Se agrego el video antes de la posición especifica. " ;
             }
-            if (nuevoNodo.ligaSiguiente != null)
-            {
-                nuevoNodo.ligaSiguiente.ligaAnterior = nuevoNodo;
-                return "Se ha agregado el video en la posición requerida.";
-            }
-            else
-            {
-                ultimoNodo = nuevoNodo;
-                return "Se ha agregado el video en la posición requerida.";
-            }
-
+            return "La posición especifica esta fuera de rango. ";
         }
 
         public string DeleteToTop()
@@ -220,8 +209,8 @@ namespace ListasDoblementeEnlazadas.Services
             primerNodo.ligaAnterior = null;
             return "Se ha eliminado el primer video de la lista. ";
         }
-    } 
-
+    }
+    /*
         public string AddToAfterVideoX(string videoX, Nodo nuevoNodo)
         {
             if (isEmpty)
@@ -295,9 +284,6 @@ namespace ListasDoblementeEnlazadas.Services
                 return "Posición inválida";
             }
 
-        }
+        }*/
 
-
-
-    }
 }
