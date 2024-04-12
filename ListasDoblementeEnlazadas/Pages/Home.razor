@@ -233,19 +233,82 @@
     //Jorge Leonardo
     void DeleteBeforeVideoX()
     {
+        Nodo nodoActual = lista.primerNodo;
+        Nodo nodoAnterior = null;
+
+        while (nodoActual != null)
+        {
+            if (nodoActual.ligaAnterior != null && nodoActual.ligaAnterior.informacion == videoX)
+            {
+                Nodo nodoEliminar = nodoActual;
+
+                if (nodoActual == lista.nodoActual)
+                {
+                    lista.nodoActual = nodoEliminar;
+                }
+
+                nodoActual.ligaSiguiente.ligaAnterior = nodoActual.ligaAnterior;
+                nodoActual.ligaAnterior.ligaSiguiente = nodoActual.ligaSiguiente;
+
+                lista.EliminarNodo(nodoEliminar);
+
+                break;
+            }
+
+            nodoAnterior = nodoActual;
+            nodoActual = nodoActual.ligaSiguiente;
+        }
+
+        mensaje = "Se ha eliminado el nodo antes de " + videoX;
 
     }
 
     //Jorge Leonardo
     void DeleteAfterVideoX()
     {
+        Nodo nodoActual = lista.primerNodo;
 
+        while (nodoActual != null)
+        {
+            if (nodoActual.informacion == videoX && nodoActual.ligaSiguiente != null)
+            {
+                Nodo nodoEliminar = nodoActual.ligaSiguiente;
+
+                if (nodoEliminar == lista.nodoActual)
+                {
+                    lista.nodoActual = nodoEliminar.ligaSiguiente;
+                }
+
+                if (nodoEliminar == lista.ultimoNodo)
+                {
+                    lista.ultimoNodo = nodoActual;
+                }
+
+                nodoActual.ligaSiguiente = nodoEliminar.ligaSiguiente;
+
+                lista.EliminarNodo(nodoEliminar);
+
+                mensaje = "Se ha eliminado el nodo después de " + videoX;
+
+                break;
+            }
+
+            nodoActual = nodoActual.ligaSiguiente;
+        }
     }
 
     //Jorge Leonardo
     void DeleteInSpecificPosition()
     {
+        if (posicion <= 0)
+        {
+            mensaje = "La posición específica debe ser un número positivo.";
+            return;
+        }
 
+        mensaje = lista.DeleteInSpecificPosition(posicion);
+        PlayVideo();
+        posicion = 0;
     }
 
     //Wilmer
