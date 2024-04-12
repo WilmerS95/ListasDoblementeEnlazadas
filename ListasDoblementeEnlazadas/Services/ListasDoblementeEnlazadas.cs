@@ -223,7 +223,175 @@ namespace ListasDoblementeEnlazadas.Services
 
         }
 
+        public string DeleteBeforeVideoX(string videoX)
+        {
+            if (isEmpty)
+            {
+                return "La lista está vacía, no hay elementos para eliminar";
+            }
 
+            Nodo nodoActual = primerNodo;
 
+            while (nodoActual != null)
+            {
+                if (nodoActual.informacion.ToString() == videoX)
+                {
+                    if (nodoActual == primerNodo)
+                    {
+                        return "No hay elementos antes del video específico para eliminar";
+                    }
+                    else if (nodoActual.ligaAnterior == primerNodo)
+                    {
+                        primerNodo = nodoActual;
+                        primerNodo.ligaAnterior = null;
+                        nodoActual = null;
+                    }
+                    else
+                    {
+                        Nodo nodoAnterior = nodoActual.ligaAnterior;
+                        nodoAnterior.ligaSiguiente = nodoActual.ligaSiguiente;
+
+                        if (nodoActual.ligaSiguiente != null)
+                        {
+                            Nodo nodoSiguiente = nodoActual.ligaSiguiente;
+                            nodoSiguiente.ligaAnterior = nodoAnterior;
+                        }
+
+                        nodoActual = null;
+                    }
+
+                    return "Se ha eliminado el elemento antes del video específico.";
+                }
+
+                nodoActual = nodoActual.ligaSiguiente;
+            }
+
+            return "El video específico no se encontró en la lista.";
+        }
+        public void EliminarNodo(Nodo nodo)
+        {
+            if (isEmpty || nodo == null)
+            {
+                return;
+            }
+
+            if (nodo == primerNodo)
+            {
+                primerNodo = nodo.ligaSiguiente;
+            }
+
+            if (nodo == ultimoNodo)
+            {
+                ultimoNodo = nodo.ligaAnterior;
+            }
+
+            if (nodo.ligaAnterior != null)
+            {
+                nodo.ligaAnterior.ligaSiguiente = nodo.ligaSiguiente;
+            }
+
+            if (nodo.ligaSiguiente != null)
+            {
+                nodo.ligaSiguiente.ligaAnterior = nodo.ligaAnterior;
+            }
+
+            nodo = null;
+        }
+        public string DeleteAfterVideoX(string videoX)
+        {
+            if (isEmpty)
+            {
+                return "La lista está vacía, no hay elementos para eliminar";
+            }
+
+            Nodo nodoActual = primerNodo;
+
+            while (nodoActual != null)
+            {
+                if (nodoActual.informacion.ToString() == videoX)
+                {
+                    if (nodoActual == ultimoNodo)
+                    {
+                        return "No hay elementos después del video específico para eliminar";
+                    }
+                    else if (nodoActual.ligaSiguiente == ultimoNodo)
+                    {
+                        Nodo nodoEliminar = nodoActual.ligaSiguiente;
+                        nodoActual.ligaSiguiente = null;
+                        ultimoNodo = nodoActual;
+                        nodoEliminar = null;
+                    }
+                    else
+                    {
+                        Nodo nodoSiguiente = nodoActual.ligaSiguiente;
+                        nodoActual.ligaSiguiente = nodoSiguiente.ligaSiguiente;
+                        nodoSiguiente.ligaSiguiente.ligaAnterior = nodoActual;
+                        nodoSiguiente = null;
+                    }
+
+                    return "Se ha eliminado el elemento después del video específico.";
+                }
+
+                nodoActual = nodoActual.ligaSiguiente;
+            }
+
+            return "El video específico no se encontró en la lista.";
+        }
+        public string DeleteInSpecificPosition(int posicion)
+        {
+            if (isEmpty)
+            {
+                return "La lista está vacía, no hay elementos para eliminar";
+            }
+
+            if (posicion < 0)
+            {
+                return "La posición debe ser un número positivo";
+            }
+
+            Nodo nodoActual = primerNodo;
+            int count = 0;
+
+            while (nodoActual != null && count < posicion)
+            {
+                nodoActual = nodoActual.ligaSiguiente;
+                count++;
+            }
+
+            if (count == posicion && nodoActual != null)
+            {
+                if (nodoActual == primerNodo)
+                {
+                    primerNodo = nodoActual.ligaSiguiente;
+                    if (primerNodo != null)
+                    {
+                        primerNodo.ligaAnterior = null;
+                    }
+                }
+                else if (nodoActual == ultimoNodo)
+                {
+                    ultimoNodo = nodoActual.ligaAnterior;
+                    if (ultimoNodo != null)
+                    {
+                        ultimoNodo.ligaSiguiente = null;
+                    }
+                }
+                else
+                {
+                    Nodo nodoAnterior = nodoActual.ligaAnterior;
+                    Nodo nodoSiguiente = nodoActual.ligaSiguiente;
+
+                    nodoAnterior.ligaSiguiente = nodoSiguiente;
+                    nodoSiguiente.ligaAnterior = nodoAnterior;
+                }
+
+                nodoActual = null;
+                return "Se ha eliminado el elemento en la posición específica";
+            }
+            else
+            {
+                return "La posición específica no se encontró en la lista";
+            }
+        }
     }
 }
