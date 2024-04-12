@@ -129,7 +129,10 @@
 
     void AddToEnd()
     {
-        
+        var nuevoNodo = new Nodo(youtubeLink);
+        mensaje = lista.AddToEnd(nuevoNodo);
+        PlayVideo(); 
+        youtubeLink = string.Empty; 
     }
 
     void AddToBeforeVideoX()
@@ -149,7 +152,11 @@
 
     void AddBeforeSpecificPosition()
     {
-
+        var nuevoNodo = new Nodo(youtubeLink); 
+        mensaje = lista.AddBeforeSpecificPosition(posicion, nuevoNodo);
+        PlayVideo();
+        youtubeLink = string.Empty;
+        posicion = 0;
     }
 
     void AddAfterSpecificPosition()
@@ -164,7 +171,9 @@
 
     void DeleteToTop()
     {
-
+        mensaje = lista.DeleteToTop();
+        PlayVideo();
+        youtubeLink = string.Empty;
     }
 
     void DeleteInTheEnd()
