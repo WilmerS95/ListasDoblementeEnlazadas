@@ -36,8 +36,6 @@ namespace ListasDoblementeEnlazadas.Services
             return "Se ha agregado al inicio de la lista";
         }
 
-
-
         public string AddBeforeVideoX(string videoX, Nodo nuevoNodo)
         {
             if (isEmpty)
@@ -170,7 +168,7 @@ namespace ListasDoblementeEnlazadas.Services
 
             while (nodoActual != null && posicion < posicionEspecifica)
             {
-                nodoActual = nodoActual.ligaSiguiente; 
+                nodoActual = nodoActual.ligaSiguiente;
                 posicion++;
             }
 
@@ -232,7 +230,7 @@ namespace ListasDoblementeEnlazadas.Services
 
         public string VideoSearch(string video)
         {
-          
+
             nodoActual = primerNodo;
             int posicion = 1;
 
@@ -241,7 +239,7 @@ namespace ListasDoblementeEnlazadas.Services
                 if (nodoActual.informacion.ToString() == video)
                 {
                     return $"El video '{video}' fue encontrado en la posición {posicion}.";
-                   
+
                 }
                 nodoActual = nodoActual.ligaSiguiente;
                 posicion++;
@@ -283,7 +281,7 @@ namespace ListasDoblementeEnlazadas.Services
                 intercambio = false;
                 nodoActual = primerNodo;
                 Nodo nodosiguiente = primerNodo?.ligaSiguiente;
-              
+
                 while (nodosiguiente != null)
                 {
                     if (string.Compare(nodoActual.informacion.ToString(), nodosiguiente.informacion.ToString(), StringComparison.OrdinalIgnoreCase) > 0)
@@ -354,7 +352,7 @@ namespace ListasDoblementeEnlazadas.Services
             nodoActual = nuevoNodo;
             return "El video se a agregado al final de la lista.";
         }
-        
+
 
         public string DeleteToTop()
         {
@@ -390,11 +388,19 @@ namespace ListasDoblementeEnlazadas.Services
                     else
                     {
                         Nodo nodoAnterior = nodoActual.ligaAnterior;
-                        nodoAnterior.ligaSiguiente = nodoActual.ligaSiguiente;
 
-                        if (nodoActual.ligaSiguiente != null)
+                        // Verificar si el nodo anterior al nodo actual no es el primer nodo
+                        if (nodoAnterior != primerNodo)
                         {
-                            nodoActual.ligaSiguiente.ligaAnterior = nodoAnterior;
+                            Nodo nodoAnteriorAlAnterior = nodoAnterior.ligaAnterior;
+                            nodoAnteriorAlAnterior.ligaSiguiente = nodoActual;
+                            nodoActual.ligaAnterior = nodoAnteriorAlAnterior;
+                        }
+                        else
+                        {
+                            // Si el nodo anterior es el primer nodo, el nodo actual se convierte en el primer nodo
+                            primerNodo = nodoActual;
+                            nodoActual.ligaAnterior = null;
                         }
 
                         return "Se ha eliminado el elemento antes del video específico.";
@@ -406,6 +412,7 @@ namespace ListasDoblementeEnlazadas.Services
 
             return "El video específico no se encontró en la lista.";
         }
+
 
         public string DeleteAfterVideoX(string videoX)
         {
